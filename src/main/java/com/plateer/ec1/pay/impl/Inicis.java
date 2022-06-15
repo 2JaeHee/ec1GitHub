@@ -1,15 +1,16 @@
 package com.plateer.ec1.pay.impl;
 
-import com.plateer.ec1.pay.dto.*;
+import com.plateer.ec1.pay.dto.ApproveResVO;
+import com.plateer.ec1.pay.dto.CancelReq;
+import com.plateer.ec1.pay.dto.PayInfo;
 import com.plateer.ec1.pay.dto.inicis.InicisApproveReq;
 import com.plateer.ec1.pay.dto.inicis.InicisApproveRes;
 import com.plateer.ec1.pay.dto.inicis.InicisCancelReq;
 import com.plateer.ec1.pay.dto.inicis.InicisCancelRes;
 import com.plateer.ec1.pay.factory.PaymentFactory;
-import jdk.jpackage.internal.Log;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j
+@Slf4j
 public class Inicis implements PaymentFactory {
     @Override
     public ApproveResVO approve(PayInfo payInfo) {
@@ -30,7 +31,7 @@ public class Inicis implements PaymentFactory {
 
     private InicisApproveRes inicisApproveCall(InicisApproveReq req){
         //외부인터페이스 사용 시 로그추가
-        Log.info("[Inicis.approve] api call");
+        log.info("[Inicis.approve] api call");
 
         InicisApproveRes res = new InicisApproveRes();
         //외부인터페이스 사용 후 로그에 결과값 업데이트
@@ -39,9 +40,8 @@ public class Inicis implements PaymentFactory {
 
     private InicisCancelRes inicisCancelCall(InicisCancelReq inicisCancelReq){
         //외부인터페이스 사용 시 로그추가
-        Log.info("[Inicis.cancel] api call");
+        log.info("[Inicis.cancel] api call");
         InicisCancelRes res = new InicisCancelRes();
-
         //외부인터페이스 사용 후 로그에 결과값 업데이트
         return res;
     }

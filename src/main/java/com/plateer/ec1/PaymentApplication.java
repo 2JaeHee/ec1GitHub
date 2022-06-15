@@ -1,6 +1,7 @@
 package com.plateer.ec1;
 
 import com.plateer.ec1.pay.PaymentMethodEnum;
+import com.plateer.ec1.pay.dto.CancelReq;
 import com.plateer.ec1.pay.dto.PayInfo;
 import com.plateer.ec1.pay.factory.PaymentMethodFactory;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,10 @@ public class PaymentApplication {
         payInfo.setPaymentType(PaymentMethodEnum.INICIS);
 
         paymentMethodFactory.approve(payInfo);
+
+        CancelReq cancelReq = new CancelReq();
+        cancelReq.setPaymentType(PaymentMethodEnum.POINT);
+        paymentMethodFactory.cancel(cancelReq);
 
     }
 }
