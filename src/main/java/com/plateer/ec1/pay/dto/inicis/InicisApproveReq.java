@@ -18,7 +18,6 @@ public class InicisApproveReq {
     private String moid;        //가맹점 주문번호
     private String goodName;    //상품명
 
-
     public static InicisApproveReq build(@NonNull PayInfo payInfo){
         return InicisApproveReq.builder()
                 .type(pay)
