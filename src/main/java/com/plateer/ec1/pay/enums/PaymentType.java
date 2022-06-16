@@ -1,6 +1,6 @@
 package com.plateer.ec1.pay.enums;
 
-public enum PaymentMethod {
+public enum PaymentType {
     INICIS,
     POINT,
 }

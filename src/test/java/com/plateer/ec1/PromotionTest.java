@@ -1,18 +1,19 @@
 package com.plateer.ec1;
 
 import com.plateer.ec1.promotion.controller.PromotionController;
-import com.plateer.ec1.promotion.dto.Promotion;
 import com.plateer.ec1.promotion.dto.RequestPromotionVo;
 import com.plateer.ec1.promotion.dto.ResponseBaseVo;
 import com.plateer.ec1.promotion.enums.PromotionType;
 import com.plateer.ec1.promotion.factory.Calculation;
-import com.plateer.ec1.promotion.factory.CartCouponCalculation;
-import com.plateer.ec1.promotion.factory.PriceDiscountCalculation;
-import com.plateer.ec1.promotion.factory.ProductCouponCalculation;
+import com.plateer.ec1.promotion.factory.impl.CartCouponCalculation;
+import com.plateer.ec1.promotion.factory.impl.PriceDiscountCalculation;
+import com.plateer.ec1.promotion.factory.impl.ProductCouponCalculation;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PromotionTest<T extends ResponseBaseVo> {
-
+    @Autowired
+    private PromotionController promotionController;
     @Test
     void priceDiscount(){
         RequestPromotionVo requestPromotionVo = new RequestPromotionVo();
@@ -33,10 +34,10 @@ public class PromotionTest<T extends ResponseBaseVo> {
         Calculation calculation = new CartCouponCalculation();
         calculation.getCalculationData(requestPromotionVo);
     }
-
     @Test
     void test(){
-        PromotionController promotionController = new PromotionController();
-        promotionController.getPromotionApplyData(new RequestPromotionVo(), PromotionType.PRODUCT_COUPON);
+        RequestPromotionVo requestPromotionVo = new RequestPromotionVo();
+        promotionController.getPromotionApplyData(requestPromotionVo, PromotionType.PRODUCT_COUPON);
     }
+
 }

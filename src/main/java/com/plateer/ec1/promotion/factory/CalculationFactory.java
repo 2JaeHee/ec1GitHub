@@ -3,11 +3,12 @@ package com.plateer.ec1.promotion.factory;
 import com.plateer.ec1.promotion.dto.RequestPromotionVo;
 import com.plateer.ec1.promotion.dto.ResponseBaseVo;
 import com.plateer.ec1.promotion.enums.PromotionType;
-import lombok.RequiredArgsConstructor;
+import com.plateer.ec1.promotion.factory.impl.CartCouponCalculation;
+import com.plateer.ec1.promotion.factory.impl.PriceDiscountCalculation;
+import com.plateer.ec1.promotion.factory.impl.ProductCouponCalculation;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class CalculationFactory<T extends ResponseBaseVo> {
     private Calculation calculation;
 
@@ -23,5 +24,4 @@ public class CalculationFactory<T extends ResponseBaseVo> {
 
         return (T) calculation.getCalculationData(requestPromotionVo);
     }
-
 }

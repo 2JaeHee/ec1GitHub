@@ -1,9 +1,10 @@
-package com.plateer.ec1.promotion.factory;
+package com.plateer.ec1.promotion.factory.impl;
 
 import com.plateer.ec1.promotion.dto.Promotion;
 import com.plateer.ec1.promotion.dto.RequestPromotionVo;
 import com.plateer.ec1.promotion.dto.ResponseBaseVo;
 import com.plateer.ec1.promotion.dto.ResponseProductCouponVo;
+import com.plateer.ec1.promotion.factory.Calculation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

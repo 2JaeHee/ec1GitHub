@@ -1,13 +1,13 @@
-package com.plateer.ec1.pay.impl;
+package com.plateer.ec1.pay.factory.impl;
 
 import com.plateer.ec1.pay.dto.ApproveResVO;
 import com.plateer.ec1.pay.dto.CancelReq;
 import com.plateer.ec1.pay.dto.PayInfo;
-import com.plateer.ec1.pay.factory.PaymentFactory;
+import com.plateer.ec1.pay.factory.PaymentAbstractFactory;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Point implements PaymentFactory {
+public class Point implements PaymentAbstractFactory {
     private final String Y = "Y";
     @Override
     public ApproveResVO approve(PayInfo payInfo) {

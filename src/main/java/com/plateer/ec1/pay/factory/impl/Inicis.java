@@ -1,4 +1,4 @@
-package com.plateer.ec1.pay.impl;
+package com.plateer.ec1.pay.factory.impl;
 
 import com.plateer.ec1.pay.dto.ApproveResVO;
 import com.plateer.ec1.pay.dto.CancelReq;
@@ -7,13 +7,14 @@ import com.plateer.ec1.pay.dto.inicis.InicisApproveReq;
 import com.plateer.ec1.pay.dto.inicis.InicisApproveRes;
 import com.plateer.ec1.pay.dto.inicis.InicisCancelReq;
 import com.plateer.ec1.pay.dto.inicis.InicisCancelRes;
-import com.plateer.ec1.pay.factory.PaymentFactory;
+import com.plateer.ec1.pay.factory.PaymentAbstractFactory;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Inicis implements PaymentFactory {
+public class Inicis implements PaymentAbstractFactory {
     @Override
     public ApproveResVO approve(PayInfo payInfo) {
+        log.info("[Inicis.approve] Inicis 승인");
         //가상계좌 채번
         InicisApproveRes inicisApproveRes = inicisApproveCall(InicisApproveReq.build(payInfo));
         return InicisApproveRes.build(inicisApproveRes);
