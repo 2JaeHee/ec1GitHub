@@ -9,4 +9,6 @@ public interface PaymentAbstractFactory {
     ApproveResVO approve(PayInfo payInfo);
 
     void cancel(CancelReq cancelReq);
+
+    void netCancel(CancelReq cancelReq);
 }

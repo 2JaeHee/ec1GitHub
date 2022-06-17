@@ -7,11 +7,12 @@ import com.plateer.ec1.promotion.dto.ResponseProductCouponVo;
 import com.plateer.ec1.promotion.factory.Calculation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
 
 @Slf4j
-@Component
+@Service
 public class ProductCouponCalculation implements Calculation {
     /**
      * 상품쿠폰 조회 (상품에 적용되는 쿠폰 프로모션)

@@ -1,6 +1,7 @@
 package com.plateer.ec1.pay.service;
 
 import com.plateer.ec1.pay.dto.ApproveResVO;
+import com.plateer.ec1.pay.dto.CancelReq;
 import com.plateer.ec1.pay.dto.PayInfo;
 import com.plateer.ec1.pay.factory.PaymentAbstractFactory;
 import com.plateer.ec1.pay.factory.PaymentFactory;
@@ -22,5 +23,26 @@ public class PaymentServiceImpl implements PaymentService {
         PaymentAbstractFactory factory = paymentFactory.getPaymentFactory(payInfo.getPaymentType());
         return factory.approve(new PayInfo());
     }
+
+    /**
+     * 결제취소
+     * @param cancelReq
+     */
+    @Override
+    public void cancel(CancelReq cancelReq) {
+        PaymentAbstractFactory factory = paymentFactory.getPaymentFactory(cancelReq.getPaymentType());
+        factory.cancel(new CancelReq());
+    }
+
+    /**
+     * 결제망취소
+     * @param cancelReq
+     */
+    @Override
+    public void netCancel(CancelReq cancelReq) {
+        PaymentAbstractFactory factory = paymentFactory.getPaymentFactory(cancelReq.getPaymentType());
+        factory.netCancel(new CancelReq());
+    }
+
 
 }

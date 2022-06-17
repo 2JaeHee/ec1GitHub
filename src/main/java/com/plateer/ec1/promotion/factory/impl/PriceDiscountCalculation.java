@@ -7,9 +7,10 @@ import com.plateer.ec1.promotion.dto.ResponsePriceDcVo;
 import com.plateer.ec1.promotion.factory.Calculation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
+@Service
 public class PriceDiscountCalculation implements Calculation {
     /**
      * 즉시할인가격 조회 (상품 행사가에 적용되는 가격할인 프로모션)

@@ -1,10 +1,15 @@
 package com.plateer.ec1.claim.creator;
 
+import com.plateer.ec1.claim.dto.ClaimDto;
 import com.plateer.ec1.claim.dto.ClaimModel;
-import org.springframework.stereotype.Component;
 
-@Component
-public abstract class ClaimDataCreator {
+public interface ClaimDataCreator {
+
+    ClaimModel getInsertClaimData(ClaimDto claimDto);
+
+    ClaimModel getUpdateClaimData(ClaimDto claimDto);
+
+    /*
     private ClaimModel getInsertClaimDto(){
         return new ClaimModel();
     }
@@ -35,5 +40,5 @@ public abstract class ClaimDataCreator {
     public ClaimModel insertOrderClaim(ClaimModel claimModel) {
         return new ClaimModel();
     }
-
+*/
 }
