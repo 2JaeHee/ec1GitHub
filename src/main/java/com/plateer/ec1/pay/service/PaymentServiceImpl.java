@@ -2,7 +2,6 @@ package com.plateer.ec1.pay.service;
 
 import com.plateer.ec1.pay.dto.ApproveResVO;
 import com.plateer.ec1.pay.dto.PayInfo;
-import com.plateer.ec1.pay.enums.PaymentType;
 import com.plateer.ec1.pay.factory.PaymentAbstractFactory;
 import com.plateer.ec1.pay.factory.PaymentFactory;
 import lombok.RequiredArgsConstructor;

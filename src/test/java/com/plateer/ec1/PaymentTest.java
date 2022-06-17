@@ -8,11 +8,13 @@ import com.plateer.ec1.pay.service.PaymentServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class PaymentTest {
-    PaymentService paymentService;
+    private PaymentService paymentService;
+
     @BeforeEach
     public void beforeEach(){
         paymentService = new PaymentServiceImpl(new PaymentFactory());
     }
+
     @Test
     void approve(){
         PayInfo payInfo = new PayInfo();
