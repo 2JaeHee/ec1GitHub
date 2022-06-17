@@ -1,8 +1,6 @@
 package com.plateer.ec1.claim.enums;
 
-import com.plateer.ec1.claim.ClaimProcessorConfig;
-import com.plateer.ec1.claim.creator.ClaimDataCreator;
-import com.plateer.ec1.claim.creator.GeneralOrderCancelDatatCreator;
+import com.plateer.ec1.claim.processor.config.ClaimProcessorConfig;
 import com.plateer.ec1.claim.processor.ClaimProcessor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -63,5 +61,4 @@ public enum ClaimType {
         @Getter
         private final String code;
     }
-    
 }

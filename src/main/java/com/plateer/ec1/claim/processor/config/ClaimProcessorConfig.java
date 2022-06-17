@@ -1,4 +1,4 @@
-package com.plateer.ec1.claim;
+package com.plateer.ec1.claim.processor.config;
 
 import com.plateer.ec1.claim.creator.*;
 import com.plateer.ec1.claim.logHelper.MonitoringLogHelper;
