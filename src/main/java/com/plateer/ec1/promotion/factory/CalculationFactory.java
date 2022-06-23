@@ -1,27 +1,25 @@
 package com.plateer.ec1.promotion.factory;
 
-import com.plateer.ec1.promotion.dto.RequestPromotionVo;
 import com.plateer.ec1.promotion.dto.ResponseBaseVo;
 import com.plateer.ec1.promotion.enums.PromotionType;
-import com.plateer.ec1.promotion.factory.impl.CartCouponCalculation;
-import com.plateer.ec1.promotion.factory.impl.PriceDiscountCalculation;
-import com.plateer.ec1.promotion.factory.impl.ProductCouponCalculation;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class CalculationFactory<T extends ResponseBaseVo> {
-    private Calculation calculation;
 
-    public T getPromotionCalculationData(RequestPromotionVo requestPromotionVo, PromotionType promotionType) {
+    private final Map<PromotionType, Calculation> calculatorMap = new HashMap<>();
+    private final List<Calculation> calculators;
 
-        if(PromotionType.PRICE_DISCOUNT == promotionType) {
-            calculation = new PriceDiscountCalculation();
-        } else if (PromotionType.PRODUCT_COUPON == promotionType) {
-            calculation = new ProductCouponCalculation();
-        } else if (PromotionType.CART_COUPON == promotionType) {
-            calculation = new CartCouponCalculation();
-        }
+    public CalculationFactory(List<Calculation> calculators) {
+        this.calculators = calculators;
+        this.calculators.forEach(c -> this.calculatorMap.put(c.getType(), c));
+    }
 
-        return (T) calculation.getCalculationData(requestPromotionVo);
+    public Calculation getPromotionCalculator(PromotionType type) {
+        return calculatorMap.get(type);
     }
 }

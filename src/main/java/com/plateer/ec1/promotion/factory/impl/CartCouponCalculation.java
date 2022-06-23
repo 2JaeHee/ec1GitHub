@@ -4,6 +4,7 @@ import com.plateer.ec1.promotion.dto.Promotion;
 import com.plateer.ec1.promotion.dto.RequestPromotionVo;
 import com.plateer.ec1.promotion.dto.ResponseCartCouponVo;
 import com.plateer.ec1.promotion.dto.ResponseProductCouponVo;
+import com.plateer.ec1.promotion.enums.PromotionType;
 import com.plateer.ec1.promotion.factory.Calculation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,12 @@ public class CartCouponCalculation implements Calculation {
 
         return responseCartCouponVo;
     }
+
+    @Override
+    public PromotionType getType() {
+        return PromotionType.CART_COUPON;
+    }
+
     /**
      * 최대할인계산
      * @param responseCartCouponVo

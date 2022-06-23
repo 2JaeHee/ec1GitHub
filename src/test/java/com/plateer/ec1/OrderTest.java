@@ -4,18 +4,21 @@ import com.plateer.ec1.order.controller.OrderController;
 import com.plateer.ec1.order.dto.OrderRequest;
 import com.plateer.ec1.order.enums.OrderType;
 import com.plateer.ec1.order.enums.SystemType;
-import com.plateer.ec1.order.service.OrderContext;
-import com.plateer.ec1.order.service.OrderServiceImpl;
+import com.plateer.ec1.pay.dto.PayInfo;
+import com.plateer.ec1.pay.enums.PaymentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class OrderTest {
+    @Autowired
     private OrderController orderController;
 
     @BeforeEach
     public void beforeEach(){
-        orderController = new OrderController(new OrderServiceImpl(new OrderContext()));
     }
 
     @Test
@@ -24,6 +27,11 @@ public class OrderTest {
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.setOrderType(OrderType.GENERAL);
         orderRequest.setSystemType(SystemType.BO);
+
+        PayInfo payInfo = new PayInfo();
+        payInfo.setPaymentType(PaymentType.INICIS);
+        orderRequest.setPayInfo(payInfo);
+
         orderController.order(orderRequest);
     }
 
@@ -33,6 +41,10 @@ public class OrderTest {
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.setOrderType(OrderType.GENERAL);
         orderRequest.setSystemType(SystemType.FO);
+
+        PayInfo payInfo = new PayInfo();
+        payInfo.setPaymentType(PaymentType.INICIS);
+        orderRequest.setPayInfo(payInfo);
         orderController.order(orderRequest);
     }
 
@@ -42,6 +54,11 @@ public class OrderTest {
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.setOrderType(OrderType.ECOUPON);
         orderRequest.setSystemType(SystemType.BO);
+
+        PayInfo payInfo = new PayInfo();
+        payInfo.setPaymentType(PaymentType.POINT);
+        orderRequest.setPayInfo(payInfo);
+
         orderController.order(orderRequest);
     }
 
@@ -51,6 +68,11 @@ public class OrderTest {
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.setOrderType(OrderType.ECOUPON);
         orderRequest.setSystemType(SystemType.FO);
+
+        PayInfo payInfo = new PayInfo();
+        payInfo.setPaymentType(PaymentType.POINT);
+        orderRequest.setPayInfo(payInfo);
+
         orderController.order(orderRequest);
     }
 }

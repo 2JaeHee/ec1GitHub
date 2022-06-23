@@ -2,50 +2,54 @@ package com.plateer.ec1.order.service;
 
 import com.plateer.ec1.order.dto.OrderDto;
 import com.plateer.ec1.order.dto.OrderRequest;
-import com.plateer.ec1.order.dto.OrderValidationDto;
 import com.plateer.ec1.order.enums.OrderType;
-import com.plateer.ec1.order.enums.OrderValidator;
 import com.plateer.ec1.order.enums.SystemType;
 import com.plateer.ec1.order.strategy.AfterStrategy;
 import com.plateer.ec1.order.strategy.DataStrategy;
-import com.plateer.ec1.order.strategy.impl.BoAfterStrategy;
-import com.plateer.ec1.order.strategy.impl.EcouponDataStrategy;
-import com.plateer.ec1.order.strategy.impl.FoAfterStrategy;
-import com.plateer.ec1.order.strategy.impl.GeneralDataStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
+@Slf4j
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderContext orderContext;
-    private final Map<OrderType, Supplier<DataStrategy>> dataStrategyMap = new HashMap<>();
-    private final Map<SystemType, Supplier<AfterStrategy>> afterStrategyMap = new HashMap<>();
+    private Map<OrderType, DataStrategy> dataStrategyMap = new HashMap<>();
+    private Map<SystemType, AfterStrategy> afterStrategyMap = new HashMap<>();
+    private final List<DataStrategy> dataStrategies;
+    private final List<AfterStrategy> afterStrategies;
 
-    public OrderServiceImpl(OrderContext orderContext) {
+    public OrderServiceImpl(OrderContext orderContext, List<DataStrategy> dataStrategies, List<AfterStrategy> afterStrategies) {
         this.orderContext = orderContext;
-        this.dataStrategyMap.put(OrderType.GENERAL, GeneralDataStrategy::new);
-        this.dataStrategyMap.put(OrderType.ECOUPON, EcouponDataStrategy::new);
-
-        this.afterStrategyMap.put(SystemType.BO, BoAfterStrategy::new);
-        this.afterStrategyMap.put(SystemType.FO, FoAfterStrategy::new);
+        this.dataStrategies = dataStrategies;
+        this.afterStrategies = afterStrategies;
     }
+
+    @PostConstruct
+    public void init() {
+        dataStrategies.forEach(c -> dataStrategyMap.put(c.getType(), c));
+        afterStrategies.forEach(c -> afterStrategyMap.put(c.getType(), c));
+    }
+
     @Override
     public OrderDto order(OrderRequest orderRequest) {
-        //OrderValidator.BO_GENERAL.getValidationDtoPredicate().test(new OrderValidationDto());
         DataStrategy dataStrategy = getDataStrategy(orderRequest);
         AfterStrategy afterStrategy = getAfterStrategy(orderRequest);
+        log.info("----------- DataStrategy :" + dataStrategy);
+        log.info("----------- AfterStrategy :" +afterStrategy);
         return orderContext.excute(dataStrategy, afterStrategy, orderRequest);
     }
 
     private DataStrategy getDataStrategy(OrderRequest orderRequest) {
-        return dataStrategyMap.get(orderRequest.getOrderType()).get();
+        return dataStrategyMap.get(orderRequest.getOrderType());
     }
 
     private AfterStrategy getAfterStrategy(OrderRequest orderRequest) {
-        return afterStrategyMap.get(orderRequest.getSystemType()).get();
+        return afterStrategyMap.get(orderRequest.getSystemType());
     }
 
 }

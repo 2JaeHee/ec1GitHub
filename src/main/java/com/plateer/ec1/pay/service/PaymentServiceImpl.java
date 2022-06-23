@@ -3,7 +3,7 @@ package com.plateer.ec1.pay.service;
 import com.plateer.ec1.pay.dto.ApproveResVO;
 import com.plateer.ec1.pay.dto.CancelReq;
 import com.plateer.ec1.pay.dto.PayInfo;
-import com.plateer.ec1.pay.factory.PaymentAbstractFactory;
+import com.plateer.ec1.pay.factory.Payment;
 import com.plateer.ec1.pay.factory.PaymentFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,8 +20,8 @@ public class PaymentServiceImpl implements PaymentService {
      */
     @Override
     public ApproveResVO approve(PayInfo payInfo) {
-        PaymentAbstractFactory factory = paymentFactory.getPaymentFactory(payInfo.getPaymentType());
-        return factory.approve(new PayInfo());
+        Payment factory = paymentFactory.getPaymentFactory(payInfo.getPaymentType());
+        return factory.approve(payInfo);
     }
 
     /**
@@ -30,8 +30,8 @@ public class PaymentServiceImpl implements PaymentService {
      */
     @Override
     public void cancel(CancelReq cancelReq) {
-        PaymentAbstractFactory factory = paymentFactory.getPaymentFactory(cancelReq.getPaymentType());
-        factory.cancel(new CancelReq());
+        Payment factory = paymentFactory.getPaymentFactory(cancelReq.getPaymentType());
+        factory.cancel(cancelReq);
     }
 
     /**
@@ -40,8 +40,8 @@ public class PaymentServiceImpl implements PaymentService {
      */
     @Override
     public void netCancel(CancelReq cancelReq) {
-        PaymentAbstractFactory factory = paymentFactory.getPaymentFactory(cancelReq.getPaymentType());
-        factory.netCancel(new CancelReq());
+        Payment factory = paymentFactory.getPaymentFactory(cancelReq.getPaymentType());
+        factory.netCancel(cancelReq);
     }
 
 

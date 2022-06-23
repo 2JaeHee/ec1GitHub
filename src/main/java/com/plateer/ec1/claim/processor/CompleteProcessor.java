@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CompleteProcessor implements ClaimProcessor {
     private final ClaimValidator claimValidator;
-    private final ClaimDataCreator claimDataCreator;
+//    private final ClaimDataCreator claimDataCreator;
     private final MonitoringLogHelper monitoringLogHelper;
 
     @Override
@@ -33,9 +33,11 @@ public class CompleteProcessor implements ClaimProcessor {
     @Override
     public void doProcess(ClaimDto claimDto) {
         log.info("[CompleteProcessor.doProcess] 클레임 완료 프로세서");
-        claimDataCreator.getInsertClaimData(claimDto);
-        claimDataCreator.getUpdateClaimData(claimDto);
+//        claimDataCreator.getInsertClaimData(claimDto);
+//        claimDataCreator.getUpdateClaimData(claimDto);
         Long logNo = monitoringLogHelper.insertMonitoringLog("1");
         monitoringLogHelper.updateMonitortingLog(logNo, "complete");
+        
+        //1. 로그 , 2. vaildation, 3. insert data 생성 , 4. 결제/외부 인터페이스 호출, 5.금액검증
     }
 }

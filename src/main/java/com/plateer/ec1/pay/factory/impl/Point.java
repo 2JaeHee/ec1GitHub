@@ -3,13 +3,14 @@ package com.plateer.ec1.pay.factory.impl;
 import com.plateer.ec1.pay.dto.ApproveResVO;
 import com.plateer.ec1.pay.dto.CancelReq;
 import com.plateer.ec1.pay.dto.PayInfo;
-import com.plateer.ec1.pay.factory.PaymentAbstractFactory;
+import com.plateer.ec1.pay.enums.PaymentType;
+import com.plateer.ec1.pay.factory.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class Point implements PaymentAbstractFactory {
+public class Point implements Payment {
     private final String Y = "Y";
     @Override
     public ApproveResVO approve(PayInfo payInfo) {
@@ -31,5 +32,10 @@ public class Point implements PaymentAbstractFactory {
     public void netCancel(CancelReq cancelReq) {
         //망취소
         log.info("[Point.netCancel] Point 망취소");
+    }
+
+    @Override
+    public PaymentType getType() {
+        return PaymentType.POINT;
     }
 }

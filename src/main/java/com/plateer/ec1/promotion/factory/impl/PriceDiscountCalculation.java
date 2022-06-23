@@ -4,6 +4,7 @@ import com.plateer.ec1.promotion.dto.Promotion;
 import com.plateer.ec1.promotion.dto.RequestPromotionVo;
 import com.plateer.ec1.promotion.dto.ResponseBaseVo;
 import com.plateer.ec1.promotion.dto.ResponsePriceDcVo;
+import com.plateer.ec1.promotion.enums.PromotionType;
 import com.plateer.ec1.promotion.factory.Calculation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,12 @@ public class PriceDiscountCalculation implements Calculation {
         ResponsePriceDcVo responsePriceDcVo = calculateDcAmt(promotion);
         return responsePriceDcVo;
     }
+
+    @Override
+    public PromotionType getType() {
+        return PromotionType.PRICE_DISCOUNT;
+    }
+
     /**
      * 조회 된 프로모션 정보 계산 적용
      * @param promotion

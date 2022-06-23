@@ -7,13 +7,14 @@ import com.plateer.ec1.pay.dto.inicis.InicisApproveReq;
 import com.plateer.ec1.pay.dto.inicis.InicisApproveRes;
 import com.plateer.ec1.pay.dto.inicis.InicisCancelReq;
 import com.plateer.ec1.pay.dto.inicis.InicisCancelRes;
-import com.plateer.ec1.pay.factory.PaymentAbstractFactory;
+import com.plateer.ec1.pay.enums.PaymentType;
+import com.plateer.ec1.pay.factory.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class Inicis implements PaymentAbstractFactory {
+public class Inicis implements Payment {
     @Override
     public ApproveResVO approve(PayInfo payInfo) {
         log.info("[Inicis.approve] Inicis 승인");
@@ -35,6 +36,11 @@ public class Inicis implements PaymentAbstractFactory {
     @Override
     public void netCancel(CancelReq cancelReq) {
         log.info("[Inicis.netCancel] Inicis 망취소");
+    }
+
+    @Override
+    public PaymentType getType() {
+        return PaymentType.INICIS;
     }
 
     private InicisApproveRes inicisApproveCall(InicisApproveReq req){

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AcceptWithdrawalProcessor implements ClaimProcessor{
     private final ClaimValidator claimValidator;
-    private final ClaimDataCreator claimDataCreator;
+//    private final ClaimDataCreator claimDataCreator;
     private final MonitoringLogHelper monitoringLogHelper;
 
     @Override
@@ -33,8 +33,8 @@ public class AcceptWithdrawalProcessor implements ClaimProcessor{
     @Override
     public void doProcess(ClaimDto claimDto) {
         log.info("[AcceptWithdrawalProcessor.doProcess] 클레임 접수/철회 프로세서");
-        claimDataCreator.getInsertClaimData(claimDto);
-        claimDataCreator.getUpdateClaimData(claimDto);
+//        claimDataCreator.getInsertClaimData(claimDto);
+//        claimDataCreator.getUpdateClaimData(claimDto);
         Long logNo = monitoringLogHelper.insertMonitoringLog("1");
         monitoringLogHelper.updateMonitortingLog(logNo, "complete");
     }
